@@ -10,8 +10,8 @@ spec:
  accessModes:
    - ReadWriteOnce
  hostPath:
-   path: "/data"
-
+   path: "/data" 
+ persistentVolumeReclaimPolicy: Retain
 ---
 kind: PersistentVolume
 apiVersion: v1
@@ -26,7 +26,7 @@ spec:
    - ReadWriteOnce
  hostPath:
    path: "/data"
-
+ persistentVolumeReclaimPolicy: Retain
 ---
 kind: PersistentVolume
 apiVersion: v1
@@ -41,7 +41,7 @@ spec:
    - ReadWriteOnce
  hostPath:
    path: "/data"
-
+ persistentVolumeReclaimPolicy: Retain
 
 
 
