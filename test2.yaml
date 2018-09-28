@@ -1,0 +1,29 @@
+from pymongo import MongoClient
+from random import randint
+
+
+#Step 1: Connect to MongoDB - Note: Change connection string as ne$
+
+client = MongoClient('mongodb-service',
+username='main_admin',
+password='abc123',
+replicaset='MainRepSet',
+)
+
+db=client.business
+
+
+#Step 2:  query
+
+fivestar = db.reviews.find_one({'rating': 5})
+print(fivestar)
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+ name: mongo-db-pv
+ labels:
+    type: mongo
+spec:
+ capacity:
+   storage: 15Gi
+ accessModes:
+   - ReadWriteOnce
+ hostPath:
+   path: "/data"
+
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+ name: mongo-db-pv2
+ labels:
+   type: mongo
+spec:
+ capacity:
+   storage: 15Gi
+ accessModes:
+   - ReadWriteOnce
+ hostPath:
+   path: "/data"
+
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+ name: mongo-db-pv3
+ labels:
+   type: mongo
+spec:
+ capacity:
+   storage: 15Gi
+ accessModes:
+   - ReadWriteOnce
+ hostPath:
+   path: "/data"
+
+
+
+
+
+
+
+

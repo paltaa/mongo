@@ -1,0 +1,35 @@
+from pymongo import MongoClient
+from random import randint
+
+#Step 1: Connect to MongoDB - Note: Change connection string as ne$
+
+client = MongoClient('mongodb-service',
+username='main_admin',
+password='abc123',
+replicaset='MainRepSet',
+)
+
+db=client.business
+
+
+#Step 2: Create sample data
+
+
+names = ['Kitchen','Animal','State', 'Tastey', 'Big','City','Fish'$
+company_type = ['LLC','Inc','Company','Corporation']
+company_cuisine = ['Pizza', 'Bar Food', 'Fast Food', 'Italian', 'M$
+for x in xrange(1, 501):
+    business = {
+        'name' : names[randint(0, (len(names)-1))] + ' ' + names[r$
+        'rating' : randint(1, 5),
+        'cuisine' : company_cuisine[randint(0, (len(company_cuisin$
+    }
+    result=db.reviews.insert_one(business)
+    print('Created {0} of 100 as {1}'.format(x,result.inserted_id))
+
+print('finished creating 100 business reviews')
+
+
+
+
+
