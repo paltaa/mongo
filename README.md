@@ -1,4 +1,4 @@
-# MongoDB Deployment Demo for Kubernetes on Minikube (i.e. running on local workstation)
+# MongoDB Deployment Demo for Kubernetes on VMs
 
 An example project demonstrating the deployment of a MongoDB Replica Set via Kubernetes on Minikube (Kubernetes running locally on a workstation). Contains example Kubernetes YAML resource files (in the 'resource' folder) and associated Kubernetes based Bash scripts (in the 'scripts' folder) to configure the environment and deploy a MongoDB Replica Set.
 
@@ -13,11 +13,9 @@ Ensure the following dependencies are already fulfilled on your host Linux/Windo
 
 1. The [VirtualBox](https://www.virtualbox.org/wiki/Downloads) hypervisor has been installed.
 2. The [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) command-line tool for Kubernetes has been installed.
-3. The [Minikube](https://github.com/kubernetes/minikube/releases) tool for running Kubernetes locally has been installed.
-4. The Minikube cluster has been started, inside a local Virtual Machine, using the following command (also includes commands to check that kubectl is configured correctly to see the running minikube pod):
+
 
     ```
-    $ minikube start
     $ kubectl get nodes
     $ kubectl describe nodes
     $ kubectl get services
@@ -46,7 +44,6 @@ Ensure the following dependencies are already fulfilled on your host Linux/Windo
 
 You should now have a MongoDB Replica Set initialised, secured and running in a Kubernetes StatefulSet.
 
-You can also view the the state of the deployed environment, via the Kubernetes dashboard, which can be launched in a browser with the following command: `$ minikube dashboard`
 
 
 ### 1.3 Example Tests To Run To Check Things Are Working
@@ -73,7 +70,7 @@ Exit out of the shell and exit out of the first container (“mongod-0”). Then
     $ kubectl exec -it mongod-1 -c mongod-container bash
     $ mongo
     > db.getSiblingDB('admin').auth("main_admin", "abc123");
-    > db.setSlaveOk(1);
+    > db.setSlaveOk('true');
     > use test;
     > db.testcoll.find();
     
@@ -103,10 +100,6 @@ Run the following script to undeploy the MongoDB Service & StatefulSet.
 
     $ ./teardown.sh
 
-If you want, you can shutdown the Minikube virtual machine with the following command.
-
-    $ minikube stop
-    
 
 ## 2 Project Details
 
@@ -121,8 +114,4 @@ If you want, you can shutdown the Minikube virtual machine with the following co
 * Controlling CPU & RAM Resource Allocation
 * Correctly configuring WiredTiger Cache Size in containers
 * Controlling Anti-Affinity for Mongod Replicas to avoid a Single Point of Failure _(although in Minikube there is only one host node, so in reality all Mongod Replicas will land on the same host)_
-
-### 2.2 Factors To Be Potentially Addressed In The Future By This Project
-
-* Leveraging XFS filesystem for data file storage to improve performance _(not worth attempting to implement any hacks here to get this working in Minikube, as Minikube is just a demo/development environment, so raw performance gains from using XFS are not a priority)_
 
